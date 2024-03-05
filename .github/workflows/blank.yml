@@ -36,7 +36,7 @@ jobs:
         run: | 
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
-          python -m pytest test --junit-xml results/pytest.xml
+          python test_prime --junit-xml results/pytest.xml
         continue-on-error: true
       # テスト結果の表示
       - name: Upload Unit Test Results
