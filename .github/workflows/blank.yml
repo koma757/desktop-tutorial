@@ -43,7 +43,7 @@ jobs:
 
       # テスト結果の表示
       - name: Upload Unit Test Results
-        if: ${{ always() }}
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Unit Test Results (Python 3.7)
