@@ -48,11 +48,16 @@ jobs:
         with:
           name: Unit Test Results (Python 3.7)
           path: results/*.xml
-  
+          
+      - name: Download Artifacts
+        if: success() || failure()
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+      
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: results/*.xml
-
+          files: artifacts/**/*.xml
 
 
