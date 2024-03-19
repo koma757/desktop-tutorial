@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.017" timestamp="2024-03-19T19:05:59.268764" hostname="DESKTOP-P5NROIR"><testcase classname="test.test_prime" name="test_is_prime" time="0.000" /></testsuite></testsuites>
