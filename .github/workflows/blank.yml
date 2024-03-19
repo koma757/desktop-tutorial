@@ -1,19 +1,6 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Run pytest
+on: [push]
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   pytest:
     runs-on: ubuntu-latest
@@ -41,23 +28,21 @@ jobs:
           python -m pytest test --junit-xml results/pytest.xml
         continue-on-error: true
 
-            # テスト結果の表示
+      # テスト結果の表示
       - name: Upload Unit Test Results
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: Unit Test Results (Python 3.7)
           path: results/*.xml
-          
+
       - name: Download Artifacts
         if: success() || failure()
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           path: artifacts
-      
+
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: artifacts/**/*.xml
-
-
+          junit_files: artifacts/**/*.xml
