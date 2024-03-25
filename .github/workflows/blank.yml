@@ -23,9 +23,7 @@ jobs:
           pip install pytest
       #
       - name: Build Docker image  # ステップの名前
-        run: | # Dockerイメージをビルドする  
-          cd desktop-tutorial
-          docker build . 
+        run: docker build . 
         
       # 現在のディレクトリを表示
       - name: Display current directory
