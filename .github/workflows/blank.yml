@@ -26,6 +26,7 @@ jobs:
         run: docker build -t my_image .
                    
       # PyTest -> JUnit XML形式で結果を出力
+      #ボリュームを介してDockerコンテナ内でのテスト結果を現在のディレクトリへ反映させる
       - name: PyTest
         run: docker run -v "$(pwd)":/workspace my_image python -m pytest test --junitxml=/workspace/results/pytest.xml
         continue-on-error: true
