@@ -24,23 +24,23 @@ jobs:
       #
       - name: Build Docker image  # ステップの名前
         run: docker build -t my_image .
-        
-      # 現在のディレクトリを表示
-      - name: Display current directory
-        run: ls
-               
+                   
       # PyTest -> JUnit XML形式で結果を出力
       - name: PyTest
         run: docker run -v "$(pwd)":/workspace my_image python -m pytest test --junitxml=results/pytest.xml
         continue-on-error: true
-
+        
+      # 現在のディレクトリを表示
+      - name: Display current directory
+        run: ls
+        
       # テスト結果の表示
       - name: Upload Unit Test Results
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: Unit Test Results (Python 3.7)
-          path: /workspace/app/results/*.xml
+          path: app/results/*.xml
 
       - name: Download Artifacts
         if: success() || failure()
