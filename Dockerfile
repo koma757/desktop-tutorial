@@ -9,3 +9,4 @@ COPY . .
 
 # 必要な依存関係のインストール（例：pipのアップグレード）
 RUN pip install --upgrade pip
+RUN pip install pytest
