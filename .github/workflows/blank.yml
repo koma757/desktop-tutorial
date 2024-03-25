@@ -23,7 +23,7 @@ jobs:
           pip install pytest
       #
       - name: Build Docker image  # ステップの名前
-        run: docker build . 
+        run: docker build -t my_image .
         
       # 現在のディレクトリを表示
       - name: Display current directory
@@ -31,7 +31,7 @@ jobs:
                
       # PyTest -> JUnit XML形式で結果を出力
       - name: PyTest
-        run: docker run -v "$(pwd)":/workspace . python -m pytest test --junitxml=results/pytest.xml
+        run: docker run -v "$(pwd)":/workspace my_image python -m pytest test --junitxml=results/pytest.xml
         continue-on-error: true
 
       # テスト結果の表示
