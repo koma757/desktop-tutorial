@@ -30,26 +30,13 @@ jobs:
       - name: PyTest
         run: docker run -v "$(pwd)":/workspace my_image python -m pytest test --junitxml=/workspace/results/pytest.xml
         continue-on-error: true
+      #ファイルをダウンロード
+      - name: Download file
+        run: |
+          curl -H "Authorization: token ${{ secrets.USER_TOKEN }}" -o pretrained_model.txt https://github.com/koma757/actions-test/main/pretrained_model
         
       # 現在のディレクトリを表示
       - name: Display current directory
         run: ls
         
-      # テスト結果の表示
-      - name: Upload Unit Test Results
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: Unit Test Results (Python 3.7)
-          path: results/*.xml
-
-      - name: Download Artifacts
-        if: success() || failure()
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          junit_files: artifacts/**/*.xml
+      
